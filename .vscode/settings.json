@@ -1,9 +1,0 @@
-{
-    "makefile.launchConfigurations": [
-        {
-            "cwd": "/home/galvatron/Desktop/cSystemsAssignments/003/toFile/assignment003Systems",
-            "binaryPath": "/home/galvatron/Desktop/cSystemsAssignments/003/toFile/assignment003Systems/StrList",
-            "binaryArgs": []
-        }
-    ]
-}
