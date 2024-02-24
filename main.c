@@ -33,7 +33,7 @@ int main()
                 break;
             case 2:
                 scanf("%d",&i);
-                scanf("%s ",inputString);
+                scanf("%s",inputString);
                 StrList_insertAt(StrList,inputString,i);
                 break;
             case 3:
@@ -47,11 +47,11 @@ int main()
                 StrList_printAt(StrList,i);
                 break;
             case 6:
-                scanf("%s ",inputString);
+                scanf("%s",inputString);
                 printf("%d\n",StrList_count(StrList,inputString));
                 break;
             case 8:
-                scanf("%s ",inputString);
+                scanf("%s",inputString);
                 StrList_remove(StrList, inputString);
                 break;
             case 9:
