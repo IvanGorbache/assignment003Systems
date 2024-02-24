@@ -120,7 +120,7 @@ void StrList_insertAt(StrList* StrList,
 		else
 		{
 			index-=1;
-			while(p1 && index>=0)  {
+			while(p1 && index>0)  {
 				p1 = p1->_next;
 				index--;
 			}
@@ -157,16 +157,19 @@ void StrList_print(const StrList* StrList)
 */
 void StrList_printAt(const StrList* Strlist,int index)
 {
-	if(Strlist==NULL) return;
-	if (index<Strlist->_size)
+	if(Strlist!=NULL)
 	{
-		Node* p1= Strlist->_head;
-		while(p1->_next && index>0)  {
-			p1 = p1->_next;
-			index--;
+		if (index<Strlist->_size)
+		{
+			Node* p1= Strlist->_head;
+			while(p1->_next && index>0)  {
+				p1 = p1->_next;
+				index--;
+			}
+			printf("%s\n",p1->_data);
 		}
-		printf("%s\n",p1->_data);
 	}
+
 }
 
 /*
@@ -174,7 +177,7 @@ void StrList_printAt(const StrList* Strlist,int index)
 */
 int StrList_printLen(const StrList* Strlist)
 {
-	if(Strlist==NULL) return;
+	if(Strlist==NULL) return 0;
 	Node* p1= Strlist->_head;
 	int sum = 0;
 	while(p1) {
@@ -189,9 +192,8 @@ Given a string, return the number of times it exists in the list.
 */
 int StrList_count(StrList* StrList, const char* data)
 {
-	if(StrList==NULL) return;
+	if(StrList==NULL) return 0;
 	Node* p1= StrList->_head;
-	Node* p2;
 	int counter = 0;
 	while(p1) {
 		if(!strcmp(data,p1->_data)) counter++;
@@ -259,7 +261,7 @@ void StrList_removeAt(StrList* StrList, int index)
  */
 int StrList_isEqual(const StrList* StrList1, const StrList* StrList2)
 {
-	if(StrList1==NULL || StrList2==NULL) return;
+	if(StrList1==NULL || StrList2==NULL) return 0;
 	Node* p1 = StrList1->_head;
 	Node* f1 = StrList2->_head;
 	while(p1) {
