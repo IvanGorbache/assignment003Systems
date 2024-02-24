@@ -46,7 +46,10 @@ int main()
                 scanf("%d",&i);
                 StrList_printAt(StrList,i);
                 break;
-            case 6:
+           case 6:
+                printf("%d\n",StrList_printLen(StrList));
+                break;
+            case 7:
                 scanf("%s",inputString);
                 printf("%d\n",StrList_count(StrList,inputString));
                 break;
