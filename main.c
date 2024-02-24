@@ -89,7 +89,7 @@ void input(char **inputString)
 	int size = STARTING_SIZE, len = 0;
 
 	*inputString =  (char*)malloc(STARTING_SIZE * sizeof(char));
-	while(inputChar!='\n')
+	while(inputChar!='\n' && inputChar!=EOF)
 	{
 		inputChar = getchar();
 		if(len>(size-1))
@@ -97,6 +97,10 @@ void input(char **inputString)
 			size*=2;
 			*inputString = (char*)realloc(*inputString,size);
 		}
-		if(inputChar!='\n') (*inputString)[len++] = inputChar;
+		if(inputChar!='\n' && inputChar!=EOF) 
+        {
+            (*inputString)[len++] = inputChar;
+        }
 	}
+    (*inputString)[len-1] = '\0';
 }
