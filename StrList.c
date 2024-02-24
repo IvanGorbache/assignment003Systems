@@ -146,7 +146,11 @@ void StrList_print(const StrList* StrList)
 {
 	const Node* p = StrList->_head;
 	while(p) {
-		printf("%s ",p->_data);
+		printf("%s",p->_data);
+		if (p->_next)
+		{
+			printf(" ");
+		}
 		p = p->_next;
 	}
 	printf("\n");
