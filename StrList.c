@@ -60,9 +60,10 @@ void StrList_free(StrList* StrList)
 	if (StrList==NULL) return;
 	Node* p1= StrList->_head;
 	Node* p2;
+
 	while(p1) {
-		p2= p1;
-		p1= p1->_next;
+		p2 = p1;
+		p1 = p1->_next;
 		Node_free(p2);
 	}
 	free(StrList);

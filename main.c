@@ -81,7 +81,6 @@ int main()
         }
     }
     StrList_free(StrList);
-    free(inputString);
     return 0;
 }
 
