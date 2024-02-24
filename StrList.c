@@ -314,7 +314,6 @@ void StrList_reverse( StrList* StrList)
 int cmpfunc (const void* a, const void* b) {
 	Node* node1 = *(Node**)a;
     Node* node2 = *(Node**)b;
-    printf("%s\n", node1->_data);
     return strcmp(node1->_data, node2->_data);
 }
 /*
