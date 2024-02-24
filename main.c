@@ -72,7 +72,7 @@ int main()
                 StrList_sort(StrList);
                 break;
             case 13:
-                StrList_isSorted(StrList)?printf("true\n"):printf("false\n");
+                StrList_isSorted(StrList)?printf("true"):printf("false");
                 break;
             default:
                 continue;
