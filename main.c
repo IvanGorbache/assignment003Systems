@@ -72,7 +72,7 @@ int main()
                 StrList_sort(StrList);
                 break;
             case 13:
-                StrList_isSorted(StrList)?printf("true"):printf("false");
+                StrList_isSorted(StrList)?printf("true\n"):printf("false\n");
                 break;
             default:
                 continue;
@@ -102,5 +102,5 @@ void input(char **inputString)
             (*inputString)[len++] = inputChar;
         }
 	}
-    (*inputString)[len-1] = '\0';
+    if((*inputString)[len-1] == '\n') (*inputString)[len-1] = '\0';
 }

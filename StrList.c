@@ -27,7 +27,7 @@ Node* Node_alloc(const char* data, Node* next) {
 	Node* p= (Node*)malloc(sizeof(Node));
 	if(data != NULL)
 	{
-		p->_data= (char*)malloc(sizeof((strlen(data)+1)*sizeof(char)));
+		p->_data= (char*)malloc((strlen(data)+1)*sizeof(char));
 		strcpy(p->_data,data);
 	}
 	p->_next= next;
@@ -265,7 +265,7 @@ void StrList_removeAt(StrList* StrList, int index)
  */
 int StrList_isEqual(const StrList* StrList1, const StrList* StrList2)
 {
-	if(StrList1==NULL || StrList2==NULL) return 0;
+	if(StrList1==NULL || StrList2==NULL || StrList1->_size!=StrList2->_size) return 0;
 	Node* p1 = StrList1->_head;
 	Node* f1 = StrList2->_head;
 	while(p1) {
@@ -285,9 +285,9 @@ StrList* StrList_clone(const StrList* StrList)
 	struct _StrList* clone = StrList_alloc();
 	Node* p1 = StrList->_head;
 
-	while(p1->_next) {
-		p1 = p1->_next;
+	while(p1) {
 		StrList_insertLast(clone,p1->_data);
+		p1 = p1->_next;
 	}
 	return clone;
 }
@@ -312,32 +312,33 @@ void StrList_reverse( StrList* StrList)
 }
 
 int cmpfunc (const void* a, const void* b) {
-
-	return strcmp(((Node*)a)->_data,((Node*)b)->_data);
+	Node* node1 = *(Node**)a;
+    Node* node2 = *(Node**)b;
+    printf("%s\n", node1->_data);
+    return strcmp(node1->_data, node2->_data);
 }
 /*
  * Sort the given list in lexicographical order 
  */
 void StrList_sort( StrList* StrList)
 {
-	Node* p1 = StrList->_head;
-	Node** array = (Node**)malloc((StrList->_size)*sizeof(Node*));
-	int i = 0;
-	while(p1)
-	{
-		array[i++] = p1;
-		p1=p1->_next; 
-	}
-	qsort(array, StrList->_size, sizeof(Node*), cmpfunc);
+    Node* p1 = StrList->_head;
+    Node** array = (Node**)malloc((StrList->_size) * sizeof(Node*));
+    int i = 0;
+    while (p1) {
+        array[i++] = p1;
+        p1 = p1->_next;
+    }
 
-	StrList->_head=array[0];
-	for(i = 0;i<StrList->_size-1;i++)
-	{
-		array[i]->_next = array[i+1];
-	}
-	array[StrList->_size-1]->_next=NULL;
+    qsort(array, StrList->_size, sizeof(Node*), cmpfunc);
 
-	free(array);
+    StrList->_head = array[0];
+    for (i = 0; i < StrList->_size - 1; i++) {
+        array[i]->_next = array[i + 1];
+    }
+    array[StrList->_size-1]->_next = NULL;
+
+    free(array);
 }
 
 /*
