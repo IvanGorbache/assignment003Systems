@@ -3,7 +3,7 @@
 
 #define TRUE 1
 #define FALSE 0
-#define STARTING_SIZE 10
+#define STARTING_SIZE 100
 
 void input(char**);
 
@@ -32,8 +32,9 @@ int main()
                 break;
             case 2:
                 scanf("%d",&i);
-                scanf("%s",inputString);
+                input(&inputString);
                 StrList_insertAt(StrList,inputString,i);
+                free(inputString);
                 break;
             case 3:
                 StrList_print(StrList);
@@ -49,12 +50,14 @@ int main()
                 printf("%d\n",StrList_printLen(StrList));
                 break;
             case 7:
-                scanf("%s",inputString);
+                input(&inputString);
                 printf("%d\n",StrList_count(StrList,inputString));
+                free(inputString);
                 break;
             case 8:
-                scanf("%s",inputString);
+                input(&inputString);
                 StrList_remove(StrList, inputString);
+                free(inputString);
                 break;
             case 9:
                 scanf("%d",&i);
@@ -71,7 +74,7 @@ int main()
                 StrList_sort(StrList);
                 break;
             case 13:
-                printf("%d\n",StrList_isSorted(StrList));
+                StrList_isSorted(StrList)?printf("true\n"):printf("false\n");
                 break;
             default:
                 continue;

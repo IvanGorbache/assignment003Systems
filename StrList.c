@@ -1,6 +1,7 @@
 #include "StrList.h"
 #include <stdio.h>
-
+#define TRUE 1
+#define FALSE 0
 /*
 *	Node represents a node data structure
 */
@@ -105,17 +106,27 @@ void StrList_insertLast(StrList* StrList, const char* data)
 void StrList_insertAt(StrList* StrList,
 	const char* data,int index)
 {
-	if ((StrList!= NULL) && ((0<=index) && (index<StrList->_size)))
+	if(StrList==NULL) return;
+	
+	if (index<StrList->_size)
 	{
-		Node* current = StrList->_head;
-		Node* previous = NULL;
-		for(int i = 0;i<=index;i++)
+		Node* p1 = StrList->_head;
+		if(index == 0)
 		{
-			previous = current;
-			current = current->_next;
+			Node* newNode = Node_alloc(data,StrList->_head);
+			StrList->_head = newNode;
 		}
-		Node* newNode = Node_alloc(data, previous);
-		current = newNode;
+		else
+		{
+			index-=1;
+			while(p1 && index>=0)  {
+				p1 = p1->_next;
+				index--;
+			}
+			Node* newNode = Node_alloc(data,p1->_next);
+			p1->_next = newNode;
+		}
+		++(StrList->_size);
 	}
 }
 
@@ -134,10 +145,10 @@ void StrList_print(const StrList* StrList)
 {
 	const Node* p = StrList->_head;
 	while(p) {
-		printf("(%s)->",p->_data);
+		printf("%s ",p->_data);
 		p = p->_next;
 	}
-	printf("|| size:%zu\n",StrList->_size);
+	printf("\n");
 }
 
 /*
@@ -229,7 +240,7 @@ void StrList_removeAt(StrList* StrList, int index)
 		else
 		{
 			index-=1;
-			while(p1->_next && index>0)  {
+			while(p1 && index>0)  {
 				p1 = p1->_next;
 				index--;
 			}
@@ -302,16 +313,24 @@ int cmpfunc (const void* a, const void* b) {
  */
 void StrList_sort( StrList* StrList)
 {
-	printf("HELLO");
 	Node* p1 = StrList->_head;
-	Node** array = malloc((StrList->_size)*sizeof(Node*));
+	Node** array = (Node**)malloc((StrList->_size)*sizeof(Node*));
 	int i = 0;
 	while(p1)
 	{
 		array[i++] = p1;
 		p1=p1->_next; 
 	}
-	qsort(p1, StrList->_size, sizeof(Node*), cmpfunc);
+	qsort(array, StrList->_size, sizeof(Node*), cmpfunc);
+
+	StrList->_head=array[0];
+	for(i = 0;i<StrList->_size-1;i++)
+	{
+		array[i]->_next = array[i+1];
+	}
+	array[StrList->_size-1]->_next=NULL;
+
+	free(array);
 }
 
 /*
