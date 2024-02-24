@@ -92,6 +92,10 @@ void input(char **inputString)
 	while(inputChar!='\n' && inputChar!=EOF)
 	{
 		inputChar = getchar();
+        if (inputChar == '\n' || inputChar == '\r' || inputChar == EOF)
+        {
+            continue;
+        }
 		if(len>(size-1))
 		{
 			size*=2;
@@ -102,5 +106,4 @@ void input(char **inputString)
             (*inputString)[len++] = inputChar;
         }
 	}
-    if((*inputString)[len-1] == '\n') (*inputString)[len-1] = '\0';
 }
