@@ -12,6 +12,7 @@ int main()
     StrList* StrList = StrList_alloc();
 	int i = 0, loop = TRUE, option = 1;
     char* sentence;
+    char* inputString =  (char*)malloc(STARTING_SIZE * sizeof(char));
 	char* token;
 
 	while (option != 0 && loop == TRUE){
@@ -32,9 +33,8 @@ int main()
                 break;
             case 2:
                 scanf("%d",&i);
-				input(&sentence);
-                StrList_insertAt(StrList,sentence,i);
-                free(sentence);
+                scanf("%s",inputString);
+                StrList_insertAt(StrList,inputString,i);
                 break;
             case 3:
                 StrList_print(StrList);
@@ -50,14 +50,12 @@ int main()
                 printf("%d\n",StrList_printLen(StrList));
                 break;
             case 7:
-                input(&sentence);
-                printf("%d\n",StrList_count(StrList,sentence));
-                free(sentence);
+                scanf("%s",inputString);
+                printf("%d\n",StrList_count(StrList,inputString));
                 break;
             case 8:
-                input(&sentence);
-                StrList_remove(StrList, sentence);
-                free(sentence);
+                scanf("%s",inputString);
+                StrList_remove(StrList, inputString);
                 break;
             case 9:
                 scanf("%d",&i);
@@ -81,6 +79,7 @@ int main()
         }
     }
     StrList_free(StrList);
+    free(inputString);
     return 0;
 }
 
@@ -102,7 +101,7 @@ void input(char **inputString)
 			size*=2;
 			*inputString = (char*)realloc(*inputString,size);
 		}
-		if(inputChar!='\n' && inputChar!='\r' && inputChar!=EOF) 
+		if(inputChar!='\n' && inputChar!=EOF) 
         {
             (*inputString)[len++] = inputChar;
         }
