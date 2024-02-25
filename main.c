@@ -12,7 +12,6 @@ int main()
     StrList* StrList = StrList_alloc();
 	int i = 0, loop = TRUE, option = 1;
     char* sentence;
-    char* inputString =  (char*)malloc(STARTING_SIZE * sizeof(char));
 	char* token;
 
 	while (option != 0 && loop == TRUE){
@@ -33,8 +32,9 @@ int main()
                 break;
             case 2:
                 scanf("%d",&i);
-                scanf("%s",inputString);
-                StrList_insertAt(StrList,inputString,i);
+				input(&sentence);
+                StrList_insertAt(StrList,sentence,i);
+                free(sentence);
                 break;
             case 3:
                 StrList_print(StrList);
@@ -50,12 +50,14 @@ int main()
                 printf("%d\n",StrList_printLen(StrList));
                 break;
             case 7:
-                scanf("%s",inputString);
-                printf("%d\n",StrList_count(StrList,inputString));
+                input(&sentence);
+                printf("%d\n",StrList_count(StrList,sentence));
+                free(sentence);
                 break;
             case 8:
-                scanf("%s",inputString);
-                StrList_remove(StrList, inputString);
+                input(&sentence);
+                StrList_remove(StrList, sentence);
+                free(sentence);
                 break;
             case 9:
                 scanf("%d",&i);
@@ -79,7 +81,6 @@ int main()
         }
     }
     StrList_free(StrList);
-    free(inputString);
     return 0;
 }
 
