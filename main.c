@@ -101,7 +101,7 @@ void input(char **inputString)
 			size*=2;
 			*inputString = (char*)realloc(*inputString,size);
 		}
-		if(inputChar!='\n' && inputChar!=EOF) 
+		if(inputChar!='\n' && inputChar!='\r' && inputChar!=EOF) 
         {
             (*inputString)[len++] = inputChar;
         }
